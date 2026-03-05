@@ -1,0 +1,5 @@
+# Local development files
+firebase-debug.log
+.idx/
+.vscode/
+node_modules/
