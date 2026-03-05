@@ -10,9 +10,16 @@ A simple, visually appealing web application to generate random lottery numbers 
 
 *   **Layout:** Centered, responsive layout using CSS Grid/Flexbox.
 *   **Color Palette:**
-    *   Background: `oklch(95% 0.01 260)` with a subtle noise texture.
-    *   Primary: `oklch(60% 0.15 250)` (Vibrant Blue).
-    *   Accent: Various `oklch` colors for lottery balls (Yellow, Blue, Red, Gray, Green).
+    *   **Light Mode:**
+        *   Background: `oklch(95% 0.01 260)`
+        *   Surface: `rgba(255, 255, 255, 0.7)`
+    *   **Dark Mode:**
+        *   Background: `oklch(20% 0.02 260)`
+        *   Surface: `rgba(30, 41, 59, 0.7)`
+    *   **Common:**
+        *   Primary: `oklch(60% 0.15 250)` (Vibrant Blue).
+        *   Accent: Various `oklch` colors for lottery balls.
+*   **Theme Toggle:** A dedicated toggle button to switch between Light and Dark modes, with persistent state using `localStorage`.
 *   **Typography:** Expressive sans-serif typography with emphasized font sizes for the title and numbers.
 *   **Visual Effects:**
     *   **Glassmorphism:** Multi-layered drop shadows and semi-transparent backgrounds for cards.

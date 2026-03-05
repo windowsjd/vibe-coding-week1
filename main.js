@@ -45,13 +45,14 @@ class LottoGenerator extends HTMLElement {
       <style>
         :host {
           display: block;
-          background: var(--surface-color, rgba(255, 255, 255, 0.8));
+          background: var(--surface-color);
           backdrop-filter: blur(10px);
           border-radius: 2rem;
           padding: 2.5rem;
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-lg);
           text-align: center;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid var(--border-color);
+          transition: all 0.3s ease;
         }
 
         h1 {
@@ -59,7 +60,8 @@ class LottoGenerator extends HTMLElement {
           margin-bottom: 2rem;
           font-weight: 800;
           letter-spacing: -0.025em;
-          color: oklch(25% 0.02 260);
+          color: var(--text-color);
+          transition: color 0.3s ease;
         }
 
         #balls-container {
@@ -69,6 +71,12 @@ class LottoGenerator extends HTMLElement {
           margin-bottom: 2.5rem;
           flex-wrap: wrap;
           min-height: 4rem;
+        }
+
+        .status-text {
+          color: var(--text-color);
+          opacity: 0.6;
+          font-style: italic;
         }
 
         .ball {
@@ -92,7 +100,7 @@ class LottoGenerator extends HTMLElement {
         }
 
         .generate-btn {
-          background-color: oklch(60% 0.15 250);
+          background-color: var(--accent-blue);
           color: white;
           border: none;
           padding: 1rem 2rem;
@@ -101,11 +109,11 @@ class LottoGenerator extends HTMLElement {
           border-radius: 1rem;
           cursor: pointer;
           transition: all 0.2s ease;
-          box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+          box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.3);
         }
 
         .generate-btn:hover {
-          background-color: oklch(55% 0.15 250);
+          filter: brightness(1.1);
           transform: translateY(-2px);
           box-shadow: 0 6px 20px rgba(0, 118, 255, 0.23);
         }
@@ -131,8 +139,7 @@ class LottoGenerator extends HTMLElement {
       <div class="card">
         <h1>로또 번호 추첨기</h1>
         <div id="balls-container">
-          <!-- Balls will be injected here -->
-          <p style="color: #666; font-style: italic;">버튼을 눌러 번호를 생성하세요</p>
+          <p class="status-text">버튼을 눌러 번호를 생성하세요</p>
         </div>
         <button class="generate-btn" id="generate-btn">번호 생성하기</button>
       </div>

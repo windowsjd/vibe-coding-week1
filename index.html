@@ -7,9 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="테마 전환">
+        <span id="theme-icon">🌙</span>
+    </button>
     <div class="app-container">
         <lotto-generator></lotto-generator>
     </div>
     <script src="main.js" type="module"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        });
+    </script>
 </body>
 </html>

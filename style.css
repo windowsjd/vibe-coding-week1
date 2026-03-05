@@ -1,11 +1,25 @@
 :root {
+  /* Light mode colors */
   --bg-color: oklch(95% 0.01 260);
   --text-color: oklch(25% 0.02 260);
   --accent-blue: oklch(60% 0.15 250);
   --surface-color: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(255, 255, 255, 0.2);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --noise-opacity: 0.4;
+}
+
+[data-theme="dark"] {
+  /* Dark mode colors */
+  --bg-color: oklch(20% 0.02 260);
+  --text-color: oklch(90% 0.01 260);
+  --accent-blue: oklch(70% 0.15 250);
+  --surface-color: rgba(30, 41, 59, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --noise-opacity: 0.1;
 }
 
 * {
@@ -20,16 +34,53 @@ body {
   font-family: var(--font-family);
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* Noise texture effect */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Noise texture effect */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  opacity: 1;
+  opacity: var(--noise-opacity);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .app-container {
   width: 100%;
   max-width: 600px;
   padding-inline: 1rem;
+  z-index: 1;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--surface-color);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
 }
